@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Window Coordinates</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      .box {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 4px;
+        background-color: beige;
+        border-radius: 4px;
+      }
+      .box.selected {
+        background-color: coral;
+      }
+      aside {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+      }
+      button {
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <aside>
+      <button class="btn__by">Scroll by 100px(y)</button>
+      <button class="btn__to">Scroll to 100px(y)</button>
+      <button class="btn__spceial">Scroll into special</button>
+    </aside>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box selected"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+      const select = document.querySelector(".selected");
+      select.addEventListener("click", (event) => {
+        const rect = select.getBoundingClientRect();
+        console.log(rect);
+        console.log(`client :${event.clientX},${event.clientY}`);
+        console.log(`page : ${event.pageX}, ${event.pageY}`);
+      });
+
+      const btnBy = document.querySelector(".btn__by");
+      btnBy.addEventListener("click", () => {
+        window.scrollBy({ top: 100, behavior: "smooth" });
+      });
+
+      const btnTo = document.querySelector(".btn__to");
+      btnTo.addEventListener("click", () => {
+        window.scrollTo(0, 100);
+      });
+
+      const btnSpecial = document.querySelector(".btn__spceial");
+      btnSpecial.addEventListener("click", () => {
+        select.scrollIntoView();
+      });
+    </script>
+  </body>
+</html>
