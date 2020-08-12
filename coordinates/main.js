@@ -3,15 +3,21 @@ const col = document.querySelector(".col");
 const target = document.querySelector(".target");
 const tag = document.querySelector(".tag");
 
-document.addEventListener("mousemove", (event) => {
-  const x = event.clientX;
-  const y = event.clientY;
+addEventListener("load", () => {
+  const targetReact = target.getBoundingClientRect();
+  const targetHalfWidth = targetReact.width / 2;
+  const targetHalfHeight = targetReact.height / 2;
 
-  col.style.left = `${x}px`;
-  row.style.top = `${y}px`;
-  target.style.left = `${x}px`;
-  target.style.top = `${y}px`;
-  tag.style.left = `${x}px`;
-  tag.style.top = `${y}px`;
-  tag.innerHTML = `${x}px, ${y}px`;
+  document.addEventListener("mousemove", (event) => {
+    const x = event.clientX;
+    const y = event.clientY;
+
+    col.style.transform = `translateX(${x}px)`;
+    row.style.transform = `translateY(${y}px)`;
+    target.style.transform = `translate(${x - targetHalfWidth}px,${
+      y - targetHalfHeight
+    }px)`;
+    tag.style.transform = `translate(${x}px,${y}px)`;
+    tag.innerHTML = `${x}px, ${y}px`;
+  });
 });
